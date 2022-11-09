@@ -15,8 +15,7 @@
     "dev": "nodemon --exec 'yarn build:es && yarn build:umd' --watch src --watch lib",
     "test": "yarn build && yarn test:types && yarn run test:unit",
     "test:types": "tsc -p types/test",
-    "test:unit": "yarn run jest",
-    "postinstall": "npm run build"
+    "test:unit": "yarn run jest"
   },
   "repository": {
     "type": "git",
