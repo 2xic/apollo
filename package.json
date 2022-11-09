@@ -27,6 +27,10 @@
   },
   "resolutions": {
     "eslint-scope": "^5.0.0",
-    "graphql": "^15"
+    "graphql": "^15.5.0"
+  },
+  "volta": {
+    "node": "16.14.2",
+    "npm": "8.5.0"
   }
 }

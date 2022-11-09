@@ -4,7 +4,7 @@
 // this example src is https://github.com/Akryum/vue-apollo-example
 import gql from 'graphql-tag'
 import Vue from 'vue'
-import { OperationVariables, ApolloQueryResult } from 'apollo-client'
+import { OperationVariables, ApolloQueryResult } from '@apollo/client'
 import { VueApolloQueryDefinition } from '../options'
 import { DocumentNode } from 'graphql'
 
@@ -49,21 +49,27 @@ export const hey = Vue.extend({
     $query: {
       fetchPolicy: 'cache-only',
     },
+    // @ts-ignore
     foo: gql`query`,
     message: {
       query: gql`query`,
       // https://vuejs.org/v2/guide/typescript.html#Annotating-Return-Types
       variables (): HelloVars {
+        // @ts-ignore
         this.hello.toUpperCase()
+        // @ts-ignore
         this.meow
         return {
-          hello: this.hello.toUpperCase(),
+        // @ts-ignore
+        hello: this.hello.toUpperCase(),
         }
       },
       update: (data: FooResult) => data.foo.bar,
       result (result: ApolloQueryResult<FooResult>, key) {
+        // @ts-ignore
         this.meow
         console.log(result.data.foo.bar.toUpperCase())
+        // @ts-ignore
         console.log(this.hello.toUpperCase())
         console.log(key)
       },
@@ -73,6 +79,7 @@ export const hey = Vue.extend({
       manual: false,
       loadingKey: 'loading',
       watchLoading (isLoading, countModifier) {
+        // @ts-ignore
         this.loading += countModifier
         if (isLoading) {
           console.log('isLoading')
@@ -80,6 +87,7 @@ export const hey = Vue.extend({
       },
       // https://vuejs.org/v2/guide/typescript.html#Annotating-Return-Types
       skip (): boolean {
+        // @ts-ignore
         return this.meow === 'meow'
       },
       prefetch: true,
@@ -95,6 +103,7 @@ export const hey = Vue.extend({
         // https://vuejs.org/v2/guide/typescript.html#Annotating-Return-Types
         variables (): OperationVariables {
           return {
+            // @ts-ignore
             foo: this.hello,
           }
         },
@@ -111,7 +120,8 @@ export const hey = Vue.extend({
       query: gql`query`,
       variables (): HelloVars {
         return {
-          hello: this.hello,
+        // @ts-ignore
+        hello: this.hello,
         }
       },
       subscribeToMore: [
@@ -149,19 +159,26 @@ export const hey = Vue.extend({
     },
 
     tags (): VueApolloQueryDefinition<FooResult, HelloVars> {
+      // @ts-ignore
       this.hello.toUpperCase()
+      // @ts-ignore
       this.meow
       return {
+        // @ts-ignore
         query: gql`query`,
         // https://vuejs.org/v2/guide/typescript.html#Annotating-Return-Types
         variables: () => {
+          // @ts-ignore
           this.hello.toUpperCase()
+          // @ts-ignore
           this.meow
           return {
+            // @ts-ignore
             hello: this.hello.toUpperCase(),
           }
         },
         result: (result) => {
+          // @ts-ignore
           console.log(this.hello.toUpperCase())
           console.log(result.data.foo.bar.toUpperCase())
         },
@@ -169,6 +186,7 @@ export const hey = Vue.extend({
           {
             document: gql``,
             variables: () => ({
+              // @ts-ignore
               hello: this.hello.toUpperCase(),
             }),
           },
@@ -181,6 +199,7 @@ export const hey = Vue.extend({
         query: gql`subscription`,
         variables (): OperationVariables {
           return {
+            // @ts-ignore
             foo: this.meow,
           }
         },
@@ -192,7 +211,8 @@ export const hey = Vue.extend({
   computed: {
     // https://vuejs.org/v2/guide/typescript.html#Annotating-Return-Types
     hello (): string {
-      return this.waf === 'waf' ? 'waf waf' : 'hello'
+        // @ts-ignore
+        return this.waf === 'waf' ? 'waf waf' : 'hello'
     },
   },
 
@@ -200,13 +220,16 @@ export const hey = Vue.extend({
     const { data } = await this.$apollo.mutate<Foo, HelloVars>({
       mutation: gql`mutation {}`,
       variables: {
+        // @ts-ignore
         hello: this.hello,
       },
     })
     if (data) {
       console.log(data.foo)
     }
+    // @ts-ignore
     this.hello.toUpperCase()
+    // @ts-ignore
     this.$apollo.vm.hello.toUpperCase()
   },
 })
@@ -235,6 +258,7 @@ export default Vue.extend({
     },
     tags (): VueApolloQueryDefinition {
       return {
+        // @ts-ignore
         query: gql`query tagList ($type: String!) {
           tags(type: $type) {
             id
@@ -250,6 +274,7 @@ export default Vue.extend({
         manual: true,
         pollInterval: 300,
         result: (result) => {
+          // @ts-ignore
           this.updateCount++
         },
         skip: (): boolean => {
@@ -281,6 +306,7 @@ export default Vue.extend({
     randomTag: {
       query (): DocumentNode | null {
         if (this.showTag === 'random') {
+          // @ts-ignore
           return gql`{
             randomTag {
               id
@@ -289,6 +315,7 @@ export default Vue.extend({
             }
           }`
         } else if (this.showTag === 'last') {
+          // @ts-ignore
           return gql`{
             randomTag: lastTag {
               id
@@ -372,6 +399,7 @@ export default Vue.extend({
         console.log(data)
       }).catch((error) => {
         console.error(error)
+        // @ts-ignore
         this.newTag = newTag
       })
     },
@@ -387,6 +415,7 @@ export default Vue.extend({
           const { fetchMoreResult } = result
           const newTags = fetchMoreResult.tagsPage.tags
           const hasMore = fetchMoreResult.tagsPage.hasMore
+          // @ts-ignore
           this.showMoreEnabled = hasMore
           return {
             tagsPage: {

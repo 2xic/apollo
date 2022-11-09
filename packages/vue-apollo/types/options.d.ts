@@ -5,7 +5,7 @@ import {
   SubscribeToMoreOptions,
   ApolloQueryResult,
   ApolloError,
-} from 'apollo-client'
+} from '@apollo/client'
 import { DocumentNode } from 'graphql'
 // import { DeepApplyThisType } from './utils'
 

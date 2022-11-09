@@ -8,9 +8,9 @@ import {
   MutationOptions,
   SubscriptionOptions,
   OperationVariables,
-} from 'apollo-client'
-import { FetchResult } from 'apollo-link'
-import Observable from 'zen-observable'
+} from '@apollo/client'
+import { FetchResult } from '@apollo/client'
+import { Observable } from '@apollo/client'
 import { ApolloProvider } from './apollo-provider'
 import {
   VueApolloQueryDefinition,
